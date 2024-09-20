@@ -40,7 +40,7 @@ summary(model1)
 summary(model2)
 plot(model1)
 sp_data$predicted_ERA <- predict(model1, sp_data)
-sp_data <- sp_data %>%
+sp_data = sp_data %>%
   arrange(predicted_ERA) %>%
   mutate(rank = row_number())
 head(sp_data %>% select(Name, Team, predicted_ERA, rank))
@@ -72,15 +72,15 @@ modelwhip1 = lm(WHIP ~ ERA + IP + H + ER + BB + BABIP, data=train_data)
 summary(modelwhip1)
 rfwhip = randomForest(WHIP ~ ERA + IP + H + ER + BB + BABIP, data=train_data)
 test_data$predicted_WHIP_rf = predict(rfwhip, test_data)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(predicted_WHIP_rf) %>%
   mutate(rank_whip_rf = row_number())
 head(test_data %>% select(Name, Team, predicted_WHIP_rf, rank_whip_rf))
 
 head(test_data %>% select(Name, Team, rank_rf, rank_whip_rf))
-test_data <- test_data %>%
+test_data = test_data %>%
   mutate(total_rank = rank_rf  + rank_whip_rf)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(total_rank)
 head(test_data %>% select(Name, Team, total_rank, rank_rf, rank_whip_rf))
 --------------------------------------------------------------------------------
@@ -91,13 +91,13 @@ modelfip1 = lm(FIP~  GS + ERA + IP + ER + HR + K + BB , data = train_data)
 summary(modelfip1)
 rffip = randomForest(FIP~  GS + ERA + IP + ER + HR + K + BB , data = train_data)
 test_data$predicted_FIP_rf = predict(rffip, test_data)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(predicted_FIP_rf) %>%
   mutate(rank_fip_rf = row_number())
 head(test_data %>% select(Name, Team, predicted_FIP_rf,rank_fip_rf))
-test_data <- test_data %>%
+test_data = test_data %>%
   mutate(total_rank = rank_rf  + rank_whip_rf+rank_fip_rf)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(total_rank)
 head(test_data %>% select(Name, Team, total_rank, rank_rf, rank_whip_rf,rank_fip_rf))
 --------------------------------------------------------------------------------------------
@@ -107,13 +107,13 @@ summary(modelbabip)
 modelbabip1 = lm(BABIP~ IP + H  + HR + K + BB + WHIP, data = train_data)
 rfbabip = randomForest(BABIP~ IP + H  + HR + K + BB + WHIP, data = train_data)
 test_data$predicted_BABIP_rf = predict(rfbabip, test_data)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(predicted_BABIP_rf) %>%
   mutate(rank_babip_rf = row_number())
 head(test_data %>% select(Name, Team, predicted_BABIP_rf,rank_babip_rf))
-test_data <- test_data %>%
+test_data = test_data %>%
   mutate(total_rank = rank_rf  + rank_whip_rf+rank_fip_rf+rank_babip_rf)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(total_rank)
 head(test_data %>% select(Name, Team, total_rank, rank_rf, rank_whip_rf,rank_fip_rf, rank_babip_rf))
 --------------------------------------
@@ -128,13 +128,13 @@ modelk91 = lm(K_per_9 ~ ERA +ER + HR + BABIP + BB + WHIP +  FIP, data = train_da
 summary(modelk91)
 rfbk9 = randomForest(K_per_9~ IP + H  + HR + K + BB + WHIP, data = train_data)
 test_data$predicted_K_per_9_rf = predict(rfbk9, test_data)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(desc(predicted_K_per_9_rf)) %>%
   mutate(rank_k9_rf = row_number())
 head(test_data %>% select(Name, Team, predicted_K_per_9_rf,rank_k9_rf))
-test_data <- test_data %>%
+test_data = test_data %>%
   mutate(total_rank = rank_rf  + rank_whip_rf+rank_fip_rf+rank_babip_rf+rank_k9_rf)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(total_rank)
 head(test_data %>% select(Name, Team, total_rank, rank_rf, rank_whip_rf,rank_fip_rf, rank_babip_rf,rank_k9_rf))
 ----------------------------------------------
@@ -148,13 +148,13 @@ modelbb91 = lm(BB_per_9 ~  ERA + H + ER + HR + BABIP + K + WHIP +  FIP, data = t
 summary(modelbb91)
 rfbb9 = randomForest(BB_per_9 ~  ERA + H + ER + HR + BABIP + K + WHIP +  FIP, data = train_data)
 test_data$predicted_BB_per_9_rf = predict(rfbb9, test_data)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange((predicted_BB_per_9_rf)) %>%
   mutate(rank_bb9_rf = row_number())
 head(test_data %>% select(Name, Team, predicted_BB_per_9_rf,rank_bb9_rf))
-test_data <- test_data %>%
+test_data = test_data %>%
   mutate(total_rank = rank_rf  + rank_whip_rf+rank_fip_rf+rank_babip_rf+rank_k9_rf+rank_bb9_rf)
-test_data <- test_data %>%
+test_data = test_data %>%
   arrange(total_rank)
 
 head(test_data %>% select(Name, Team, total_rank, rank_rf, rank_whip_rf,rank_fip_rf, rank_babip_rf,rank_k9_rf,rank_bb9_rf))
