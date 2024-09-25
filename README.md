@@ -1,0 +1,1 @@
+This repository contains the code and models used to predict the potential 2024 Cy Young winner in the MLB based on key pitching statistics. This project utilizes machine learning techniques, specifically randomforests to rank pitchers and then get a final rank!
